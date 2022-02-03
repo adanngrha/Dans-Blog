@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dan's Blog | Blog</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <h1>Halaman Blog</h1>
-    <h2><?= $name; ?></h2>
-    <h3><?= $email; ?></h3>
-    <img src="img/<?= $image; ?>" alt="nice" width="200">
-</body>
-</html>
+@extends('layouts.main')
+
+@section('container')
+    <article>
+        <h2>{{ $post["title"] }}</h2>
+        <h5>{{ $post["author"] }}</h5>
+        <p>
+            {{ $post["body"] }}
+        </p>
+    </article>
+
+    <a href="/blogs">Back to Blogs</a>
+@endsection
