@@ -2,6 +2,7 @@
 
 @section('container')
 
+    <h1>Halaman Blogs</h1>
     @foreach ($posts as $post)
         <article class="mb-5">
         <h2>
