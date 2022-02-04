@@ -3,10 +3,9 @@
 @section('container')
 
     <article>
-        <h2>{{ $post["title"] }}</h2>
-        <h5>Author: {{ $post["author"] }}</h5>
+        <h2>{{ $post->title }}</h2>
         <p>
-            {{ $post["body"] }}
+            {!! $post->body !!}
         </p>
     </article>
 
