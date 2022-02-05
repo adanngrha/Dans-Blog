@@ -3,6 +3,9 @@
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Models\Category;
+
+use function Ramsey\Uuid\v1;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +39,18 @@ Route::get('/blogs', [PostController::class, 'index']);
 // single post page
 Route::get('blog/{post:slug}', [PostController::class, 'show']);
 
+Route::get('/categories', function() {
+    return view('categories', [
+        'title' => 'Categories',
+        'categories' => Category::all(),
+    ]);
+});
+
+// single category
+Route::get('categories/{category:slug}', function (Category $category) {
+    return view('category', [
+        'title' => $category->name,
+        'posts' => $category->posts,
+        'category' => $category->name,
+    ]);
+});
