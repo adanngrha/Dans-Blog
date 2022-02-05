@@ -1,11 +1,12 @@
 <?php
 
 use App\Models\Post;
+use App\Models\User;
+use App\Models\Category;
+use function Ramsey\Uuid\v1;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-use App\Models\Category;
-
-use function Ramsey\Uuid\v1;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,5 +53,22 @@ Route::get('categories/{category:slug}', function (Category $category) {
         'title' => $category->name,
         'posts' => $category->posts,
         'category' => $category->name,
+    ]);
+});
+
+
+// Authors
+Route::get('/authors', function () {
+    return view('authors', [
+        'title' => 'Authors',
+        'authors' => User::all(),
+    ]);
+});
+
+Route::get('authors/{author:username}', function (User $author) {
+    return view('author', [
+        'title' => 'Author',
+        'author' => $author->name,
+        'posts' => $author->posts,
     ]);
 });
