@@ -2,15 +2,22 @@
 
 @section('container')
 
-    <h1>Blogs Page</h1>
+    <h1 class="mb-5">Blogs Page</h1>
+
     @foreach ($posts as $post)
-        <article class="mb-5">
-        <h2>
-            <a href="/blog/{{ $post->slug }}">{{ $post->title }}</a>
-        </h2>
+        <article class="mb-5 pb-4 border-bottom">
+        <h2> {{ $post->title }} </h2>
+        <p>
+            By: <a href="#">{{ $post->user->name }}</a> in
+            <a href="/categories/{{ $post->category->slug }}">
+                {{ $post->category->name }}
+            </a>
+        </p>
         <p>
             {{ $post->excerpt }}
         </p>
+
+        <a href="/blog/{{ $post->slug }}">Read more...</a>
         </article>
     @endforeach
 
