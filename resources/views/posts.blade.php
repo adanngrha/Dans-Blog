@@ -2,12 +2,23 @@
 
 @section('container')
 
-    <h1 class="mb-5">Blogs Page</h1>
+    <h1 class="mb-4 text-center">{{ $title }}</h1>
 
-    <div class="row">
+    <div class="row justify-content-center mb-3">
         <div class="col-md-6">
-            <form action="/posts">
-
+            <form action="/blogs">
+                @if (request('category'))
+                    <input type="hidden" name="category" value="{{ request('category') }}">
+                @elseif (request('author'))
+                    <input type="hidden" name="author" value="{{ request('author') }}">
+                @elseif (request('category') && request('author'))
+                    <input type="hidden" name="category" value="{{ request('category') }}">
+                    <input type="hidden" name="author" value="{{ request('author') }}">
+                @endif
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search..." name="search" value="{{ request('search') }}">
+                    <button class="btn btn-outline-secondary btn-dark text-white" type="submit">Search</button>
+                </div>
             </form>
         </div>
     </div>
@@ -20,8 +31,8 @@
             <p>
                 <small>
                     <p>
-                    By: <a href="/authors/{{ $posts[0]->user->username }}">{{ $posts[0]->user->name }}</a> in
-                    <a href="/categories/{{ $posts[0]->category->slug }}">
+                    By: <a href="/blogs?author={{ $posts[0]->user->username }}">{{ $posts[0]->user->name }}</a> in
+                    <a href="/blogs?category={{ $posts[0]->category->slug }}">
                         {{ $posts[0]->category->name }}
                     </a> {{ $posts[0]->created_at->diffForHumans() }}
                     </p>
@@ -38,12 +49,12 @@
             <div class="col-md-4 mb-3">
                 <div class="card">
                 <div class="position-absolute px-3 py-2 rounded-3" style="background-color: rgba(0, 0, 0, 0.5)">
-                    <a class="text-white" href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
+                    <a class="text-white" href="//blogs?category={{ $post->category->slug }}">{{ $post->category->name }}</a>
                 </div>
                 <img src="https://source.unsplash.com/500x400/?{{ $post->category->name }}" class="card-img-top" alt="{{ $post->title }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ $post->title }}</h5><p>
-                        By: <a href="/authors/{{ $post->user->username }}">{{ $post->user->name }}</a> {{ $post->created_at->diffForHumans() }}
+                        By: <a href="/blogs?author={{ $post->user->username }}">{{ $post->user->name }}</a> in <a href="/blogs?category={{ $post->category->slug }}">{{ $post->category->name }}</a>, {{ $post->created_at->diffForHumans() }}
                     </p>
                     <p class="card-text">{{ $post->excerpt }}</p>
                     <a class="btn btn-primary text-white" href="/blog/{{ $post->slug }}">Read more</a>
@@ -57,5 +68,10 @@
     @else
         <p class="text-center fs-4">No Post Found.</p>
     @endif
+
+    <div class="d-flex justify-content-center mb-5">
+        {{ $posts->links() }}
+    </div>
+
 
 @endsection
