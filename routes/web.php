@@ -7,6 +7,8 @@ use function Ramsey\Uuid\v1;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +24,14 @@ use App\Http\Controllers\PostController;
 Route::get('/', function () {
     return view('home', [
         "title" => "Home",
+        "active" => "Home",
     ]);
 });
 
 Route::get('/about', function () {
     return view('about', [
         "title" => "About",
+        "active" => "About",
         "name" => "Adan Nugraha",
         "email" => "adangrha@email.com",
         "image" => "azuki2.png"
@@ -43,6 +47,7 @@ Route::get('blog/{post:slug}', [PostController::class, 'show']);
 Route::get('/categories', function() {
     return view('categories', [
         'title' => 'Categories',
+        'active' => 'Categories',
         'categories' => Category::all(),
     ]);
 });
@@ -51,6 +56,7 @@ Route::get('/categories', function() {
 Route::get('categories/{category:slug}', function (Category $category) {
     return view('posts', [
         'title' => $category->name,
+        'active' => $category->name,
         'posts' => $category->posts,
         'category' => $category->name,
     ]);
@@ -61,14 +67,22 @@ Route::get('categories/{category:slug}', function (Category $category) {
 Route::get('/authors', function () {
     return view('authors', [
         'title' => 'Authors',
+        'active' => 'Authors',
         'authors' => User::all(),
     ]);
 });
 
 Route::get('authors/{author:username}', function (User $author) {
     return view('author', [
-        'title' => 'Author',
+        'title' => $author->name,
+        'active' => 'Author',
         'author' => $author->name,
         'posts' => $author->posts->load('user','category'),
     ]);
 });
+
+
+Route::get('/login', [LoginController::class, 'index']);
+
+Route::get('/register', [RegisterController::class, 'index']);
+Route::post('/register', [RegisterController::class, 'store']);

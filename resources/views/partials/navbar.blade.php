@@ -7,19 +7,25 @@
     <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
         <li class="nav-item">
-        <a class="nav-link {{ ($title === "Home") ? "active" : "" }}" aria-current="page" href="/">Home</a>
+        <a class="nav-link {{ ($active === "Home") ? "active" : "" }}" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link {{ ($title === "About") ? "active" : "" }}" href="/about">About</a>
+        <a class="nav-link {{ ($active === "About") ? "active" : "" }}" href="/about">About</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link {{ ($title === "Blogs") ? "active" : "" }}" href="/blogs">Blogs</a>
+        <a class="nav-link {{ ($active === "All Posts") ? "active" : "" }}" href="/blogs">Blogs</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link {{ ($title === "Categories") ? "active" : "" }}" href="/categories">Categories</a>
+        <a class="nav-link {{ ($active === "Categories") ? "active" : "" }}" href="/categories">Categories</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link {{ ($title === "Authors") ? "active" : "" }}" href="/authors">Authors</a>
+        <a class="nav-link {{ ($active === "Authors") ? "active" : "" }}" href="/authors">Authors</a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+            <a href="/login" class="nav-link {{ ($active === "login") ? "active" : "" }} "><i class="bi bi-box-arrow-in-right"></i> Sign In</a>
         </li>
     </ul>
     </div>
