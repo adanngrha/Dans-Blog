@@ -1,10 +1,7 @@
 <?php
 
-
-use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
-use function Ramsey\Uuid\v1;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -95,4 +92,5 @@ Route::get('/dashboard', function () {
         return view('dashboard.index');
     })->middleware('auth');
 
+Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
