@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Models\Category;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 
 class Post extends Model
@@ -59,7 +59,9 @@ class Post extends Model
     }
 
     /**
-     * Get the options for generating the slug.
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
      */
     public function sluggable(): array
     {
@@ -69,4 +71,5 @@ class Post extends Model
             ]
         ];
     }
+
 }
