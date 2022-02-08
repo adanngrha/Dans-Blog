@@ -1,17 +1,14 @@
-@extends('layouts.main')
+@extends('dashboard.layouts.main')
 
 @section('container')
-
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+        <div class="row">
+            <div class="col-lg-8">
                 <h2>{{ $post->title }}</h2>
-                <p>
-                    By: <a href="/authors/{{ $post->user->username }}">{{ $post->user->name }}</a> in
-                    <a href="/blogs?category={{ $post->category->slug }}">
-                        {{ $post->category->name }}
-                    </a>
-                </p>
+
+                <a href="/dashboard/posts" class="btn btn-success"><span data-feather="arrow-left"></span> Back to all my posts</a>
+                <a href="" class="btn btn-warning"><span data-feather="edit"></span> Edit</a>
+                <a href="" class="btn btn-danger"><span data-feather="x-circle"></span> Delete</a>
 
                 <img src="https://source.unsplash.com/800x400/?{{ $post->category->name }}" class="card-img-top img-fluid mt-1 mb-1" alt="{{ $post->title }}">
 
@@ -23,5 +20,4 @@
             </div>
         </div>
     </div>
-
 @endsection
