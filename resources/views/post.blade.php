@@ -13,7 +13,13 @@
                     </a>
                 </p>
 
-                <img src="https://source.unsplash.com/800x400/?{{ $post->category->name }}" class="card-img-top img-fluid mt-1 mb-1" alt="{{ $post->title }}">
+                @if ($post->image)
+                    <div style="max-height: 350px; overflow:hidden">
+                        <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->category->name }}" class="img-fluid">
+                    </div>
+                @else
+                    <img src="https://source.unsplash.com/800x400/?{{ $post->category->name }}" class="card-img-top img-fluid " alt="{{ $post->title }}">
+                @endif
 
                 <article class="my-3 fs-5">
                     {!! $post->body !!}
